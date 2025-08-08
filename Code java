@@ -1,0 +1,59 @@
+import java.time.LocalTime;
+import java.util.*;
+
+public class WorkshopAttendance {
+    public static void main(String[] args) {
+        HashMap<String, String> attendanceMap = new HashMap<>();
+
+        String[] students = {"Alice", "Bob", "Charlie", "Alice", "Diana", "Bob", "Eve"};
+
+        System.out.println("Adding attendees...");
+        for (String student : students) {
+            if (attendanceMap.containsKey(student)) {
+                System.out.println("⚠ " + student + " already signed in – skipped");
+            } else {
+                String time = LocalTime.now().withNano(0).toString();
+                attendanceMap.put(student, time);
+                System.out.println("✓ " + student + " at " + time);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        System.out.println("\nTotal unique attendees: " + attendanceMap.size());
+
+        List<String> sortedNames = new ArrayList<>(attendanceMap.keySet());
+        Collections.sort(sortedNames);
+
+        System.out.println("List of attendees (sorted):");
+        for (String name : sortedNames) {
+            System.out.println("- " + name + ": " + attendanceMap.get(name));
+        }
+
+        System.out.println("\nRemoving attendee: Diana...");
+        attendanceMap.remove("Diana");
+
+        sortedNames = new ArrayList<>(attendanceMap.keySet());
+        Collections.sort(sortedNames);
+        System.out.println("Updated attendees:");
+        for (String name : sortedNames) {
+            System.out.println("- " + name + ": " + attendanceMap.get(name));
+        }
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("\nEnter name to check: ");
+        String checkName = sc.nextLine();
+
+        if (attendanceMap.containsKey(checkName)) {
+            System.out.println("✅ Yes, " + checkName + " is attending!");
+            System.out.println("⏰ Sign-in time: " + attendanceMap.get(checkName));
+        } else {
+            System.out.println("❌ " + checkName + " is not attending.");
+        }
+
+        sc.close();
+    }
+}
