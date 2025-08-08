@@ -1,0 +1,57 @@
+abstract class Ticket {
+    protected double price;
+    public Ticket(double price) {
+        this.price = price;
+    }
+    public void showPrice() {
+        System.out.println("Price: $" + String.format("%.2f", price));
+    }
+    public abstract void printTicketDetails();
+}
+
+class MovieTicket extends Ticket {
+    private String movieName;
+    private String showTime;
+    private String seatNumber;
+    public MovieTicket(double price, String movieName, String showTime, String seatNumber) {
+        super(price);
+        this.movieName = movieName;
+        this.showTime = showTime;
+        this.seatNumber = seatNumber;
+    }
+    public void printTicketDetails() {
+        System.out.println("🎟 Movie Ticket");
+        System.out.println("Movie: " + movieName);
+        System.out.println("Time: " + showTime);
+        System.out.println("Seat: " + seatNumber);
+        showPrice();
+    }
+}
+
+class ConcertTicket extends Ticket {
+    private String artistName;
+    private String venue;
+    private String seatNumber;
+    public ConcertTicket(double price, String artistName, String venue, String seatNumber) {
+        super(price);
+        this.artistName = artistName;
+        this.venue = venue;
+        this.seatNumber = seatNumber;
+    }
+    public void printTicketDetails() {
+        System.out.println("🎟 Concert Ticket");
+        System.out.println("Artist: " + artistName);
+        System.out.println("Venue: " + venue);
+        System.out.println("Seat: " + seatNumber);
+        showPrice();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MovieTicket movie = new MovieTicket(10.00, "Interstellar", "7:00 PM", "A10");
+        ConcertTicket concert = new ConcertTicket(45.00, "Imagine Dragons", "City Arena", "B15");
+        movie.printTicketDetails();
+        concert.printTicketDetails();
+    }
+}
