@@ -1,0 +1,41 @@
+import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class WorkshopAttendance {
+    public static void main(String[] args) {
+        HashMap<String, String> attendees = new HashMap<>();
+        String[] names = {"Alice", "Bob", "Charlie", "Alice", "Diana", "Bob", "Eve"};
+        for (String name : names) {
+            if (!attendees.containsKey(name)) {
+                attendees.put(name, LocalTime.now().withNano(0).toString());
+                System.out.println("✓ " + name + " at " + attendees.get(name));
+            } else {
+                System.out.println("⚠ " + name + " already signed in – skipped");
+            }
+        }
+        System.out.println("\nTotal unique attendees: " + attendees.size());
+        System.out.println("List of attendees:");
+        for (Map.Entry<String, String> entry : attendees.entrySet()) {
+            System.out.println("- " + entry.getKey() + ": " + entry.getValue());
+        }
+        System.out.println("\nRemoving attendee: Diana...");
+        attendees.remove("Diana");
+        System.out.println("Updated attendees:");
+        for (Map.Entry<String, String> entry : attendees.entrySet()) {
+            System.out.println("- " + entry.getKey() + ": " + entry.getValue());
+        }
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\nCheck if a student is attending:");
+        System.out.print("Enter name: ");
+        String checkName = sc.nextLine();
+        if (attendees.containsKey(checkName)) {
+            System.out.println("✅ Yes, " + checkName + " is attending!");
+            System.out.println("⏰ Sign-in time: " + attendees.get(checkName));
+        } else {
+            System.out.println("❌ " + checkName + " is not attending.");
+        }
+        sc.close();
+    }
+}
