@@ -1,0 +1,30 @@
+class VehicleDistanceCalculator {
+    double calculateDistance(double speed, double time) {
+        return speed * time;
+    }
+
+    double calculateDistance(double speed, double time, double trafficFactor) {
+        double adjustedSpeed = speed * trafficFactor;
+        return adjustedSpeed * time;
+    }
+
+    double calculateDistance(double speed, double time, boolean isHighway) {
+        double adjustedSpeed;
+        if (isHighway) {
+            adjustedSpeed = speed * 1.1;
+        } else {
+            adjustedSpeed = speed * 0.9;
+        }
+        return adjustedSpeed * time;
+    }
+}
+
+public class DistanceCalculatorTest {
+    public static void main(String[] args) {
+        VehicleDistanceCalculator calculator = new VehicleDistanceCalculator();
+
+        System.out.println("Distance (basic): " + calculator.calculateDistance(80, 2));
+        System.out.println("Distance (traffic factor): " + calculator.calculateDistance(80, 2, 0.8));
+        System.out.println("Distance (highway): " + calculator.calculateDistance(80, 2, true));
+    }
+}
