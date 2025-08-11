@@ -1,0 +1,45 @@
+import java.util.HashSet;
+import java.util.Scanner;
+
+public class SeminarAttendance {
+    public static void main(String[] args) {
+        HashSet<String> attendees = new HashSet<>();
+
+        String[] names = {"Alice", "Bob", "Charlie", "Alice", "Diana", "Bob", "Eve"};
+
+        System.out.println("Adding attendees...");
+        for (String name : names) {
+            if (attendees.contains(name)) {
+                System.out.println(name + " (duplicate - skipped)");
+            } else {
+                attendees.add(name);
+                System.out.println("✓ " + name);
+            }
+        }
+
+        System.out.println("\nTotal unique attendees: " + attendees.size());
+        System.out.println("List of attendees:");
+        for (String name : attendees) {
+            System.out.println("- " + name);
+        }
+
+        System.out.println("\nRemoving attendee: Diana...");
+        attendees.remove("Diana");
+        System.out.println("Updated attendees:");
+        for (String name : attendees) {
+            System.out.println("- " + name);
+        }
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("\nEnter name to check: ");
+        String checkName = sc.nextLine();
+
+        if (attendees.contains(checkName)) {
+            System.out.println("✅ Yes, " + checkName + " is attending!");
+        } else {
+            System.out.println("❌ " + checkName + " is not attending.");
+        }
+
+        sc.close();
+    }
+}
