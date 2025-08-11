@@ -1,0 +1,44 @@
+class ShippingService {
+    double calculateShipping() {
+        return 0.0;
+    }
+}
+
+class StandardShipping extends ShippingService {
+    @Override
+    double calculateShipping() {
+        System.out.println("Using Standard Shipping.");
+        return 5.0;
+    }
+}
+
+class ExpressShipping extends ShippingService {
+    @Override
+    double calculateShipping() {
+        System.out.println("Using Express Shipping.");
+        return 12.5;
+    }
+}
+
+class InternationalShipping extends ShippingService {
+    @Override
+    double calculateShipping() {
+        System.out.println("Using International Shipping.");
+        return 25.0;
+    }
+}
+
+public class ECommerceShipping {
+    public static void main(String[] args) {
+        ShippingService service;
+
+        service = new StandardShipping();
+        System.out.println("Cost: $" + service.calculateShipping());
+
+        service = new ExpressShipping();
+        System.out.println("Cost: $" + service.calculateShipping());
+
+        service = new InternationalShipping();
+        System.out.println("Cost: $" + service.calculateShipping());
+    }
+}
